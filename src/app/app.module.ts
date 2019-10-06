@@ -12,6 +12,7 @@ import { DetailViewOrderComponent } from './detail-view-order/detail-view-order.
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatTableModule, MatToolbarModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,

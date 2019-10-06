@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
+import {HttpRestService} from '../../services/http-rest.service';
 
 @Component({
   selector: 'app-read-object',
@@ -12,7 +13,7 @@ export class ReadObjectComponent implements OnInit {
   categories = [];
   selectedRowIndex = -1;
 
-  constructor(private ds: DataService) { }
+  constructor(private ds: HttpRestService) { }
 
   // subscribe to data service for data updates
   ngOnInit() {
