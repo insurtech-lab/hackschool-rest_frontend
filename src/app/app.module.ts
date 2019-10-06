@@ -10,6 +10,8 @@ import { CreateObjectComponent } from './create-object/create-object.component';
 import { UpsertObjectComponent } from './upsert-object/upsert-object.component';
 import { DetailViewOrderComponent } from './detail-view-order/detail-view-order.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {MatButtonModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
