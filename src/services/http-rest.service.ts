@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 
 export interface Order {
   title: string;
@@ -10,8 +10,8 @@ export interface Order {
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'Content-Type': 'application/json',
+    Authorization: 'my-auth-token'
   })
 };
 
@@ -20,12 +20,16 @@ const httpOptions = {
 })
 export class HttpRestService {
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {
+  }
 
   // GET
   getObject() {
-    return this.http.get<Order>('http://localhost/');
+    return this.http.get<Order>('http://localhost/')
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
   }
 
   // POST
@@ -33,18 +37,27 @@ export class HttpRestService {
   addObject(order: Order): Observable<Order> {
     return this.http.post<Order>('http://localhost/', order, httpOptions)
       .pipe(
-        catchError(err => throwError('POST ist fehlgeschlagen' + order))
+        retry(2),
+        catchError(this.handleError)
       );
   }
 
   // PUT
-  putObject(a: any): any {
-    return null;
+  putObject(order: Order): Observable<Order> {
+    return this.http.put<Order>('http://localhost/', order, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // DELETE
-  deleteObject(a: any): any {
-    return null;
+  deleteObject(id: number): Observable<{}> {
+    const suburl = 'http://localhost/'; // Part of DELETE URL
+    const url = `${suburl}/${id}`; // DELETE api/heroes/42
+    return this.http.delete(url, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // some initial error handling -- nothing speical
