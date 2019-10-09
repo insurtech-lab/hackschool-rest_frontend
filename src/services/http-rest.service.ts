@@ -39,7 +39,7 @@ export class HttpRestService {
   }
 
   // GET
-  getObject(id: number) {
+  getObject(id: string) {
     const suburl = 'http://localhost/';
     const url = `${suburl}/${id}`;
     return this.http.get<Order>(url)
@@ -88,7 +88,7 @@ export class HttpRestService {
   }
 
   // DELETE
-  deleteOrder(id: number): Observable<{}> {
+  deleteOrder(id: string): Observable<{}> {
     const suburl = 'http://localhost/'; // Part of DELETE URL
     const url = `${suburl}/${id}`; // DELETE api/heroes/42
     return this.http.delete(url, httpOptions)

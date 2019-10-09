@@ -1,1 +1,32 @@
-<p>overview works!</p>
+
+  <form [formGroup]="form" autocomplete="off" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-title>Auswahlformular</mat-card-title>
+      <mat-card-content>
+
+        <mat-form-field class="marginfields">
+          <mat-label>Identifikationsnummer</mat-label>
+          <input matInput formControlName="id" placeholder="ID">
+        </mat-form-field>
+
+
+        <mat-form-field class="marginfields">
+          <mat-label>Aktion</mat-label>
+          <mat-select formControlName="action">
+            <mat-option *ngFor="let ac of actions; let i = index" [value]="actions[i].action">
+              {{ac.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button type="submit" mat-raised-button color="primary" [disabled]="form.pristine && !form.dirty">
+          Ausführen
+        </button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </form>
+
