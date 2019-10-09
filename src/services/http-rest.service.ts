@@ -4,9 +4,24 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
 export interface Order {
-  title: string;
-  data: string;
+  id: string;
+  name: string;
+  forename: string;
+  position: string;
+  street: string;
+  zip: string;
+  town: string;
 }
+
+export const POSITIONS = [
+  {id: 0, name: 'Pizza'},
+  {id: 1, name: 'Cola'},
+  {id: 2, name: 'Kaffee'},
+  {id: 3, name: 'Tee'},
+  {id: 4, name: 'Steak mit Pommes'},
+  {id: 5, name: 'Veggie-Burger'},
+  {id: 6, name: 'Curry'}
+];
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -44,7 +59,7 @@ export class HttpRestService {
 
   // POST
   // you're expecting the server to return the new order
-  addObject(order: Order): Observable<Order> {
+  addOrder(order: Order): Observable<Order> {
     return this.http.post<Order>('http://localhost/', order, httpOptions)
       .pipe(
         retry(2),
@@ -53,7 +68,7 @@ export class HttpRestService {
   }
 
   // PUT
-  putObject(order: Order): Observable<Order> {
+  putOrder(order: Order): Observable<Order> {
     return this.http.put<Order>('http://localhost/', order, httpOptions)
       .pipe(
         catchError(this.handleError)
@@ -61,7 +76,7 @@ export class HttpRestService {
   }
 
   // DELETE
-  deleteObject(id: number): Observable<{}> {
+  deleteOrder(id: number): Observable<{}> {
     const suburl = 'http://localhost/'; // Part of DELETE URL
     const url = `${suburl}/${id}`; // DELETE api/heroes/42
     return this.http.delete(url, httpOptions)
