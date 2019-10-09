@@ -8,7 +8,8 @@ import {HttpRestService, Order} from '../../services/http-rest.service';
   styleUrls: ['./read-object.component.css']
 })
 export class ReadObjectComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'quantity', 'category-name', 'category-unit', 'actions']; // TODO: hier kommen die kategorien rein, die in orders data type drin sind
+  displayedColumns: string[] = ['position', 'name', 'quantity', 'category-name', 'category-unit', 'actions'];
+  // TODO: hier kommen die kategorien rein, die in orders data type drin sind
   dataSource = new MatTableDataSource<Order>();
   selectedRowIndex = -1;
 
