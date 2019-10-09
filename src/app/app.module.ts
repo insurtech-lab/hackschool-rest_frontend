@@ -8,7 +8,6 @@ import { OverviewComponent } from './overview/overview.component';
 import { ReadObjectComponent } from './read-object/read-object.component';
 import { CreateObjectComponent } from './create-object/create-object.component';
 import { UpsertObjectComponent } from './upsert-object/upsert-object.component';
-import { DetailViewOrderComponent } from './detail-view-order/detail-view-order.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {
   MatButtonModule,
@@ -30,7 +29,6 @@ import {ReactiveFormsModule} from '@angular/forms';
     ReadObjectComponent,
     CreateObjectComponent,
     UpsertObjectComponent,
-    DetailViewOrderComponent,
     PageNotFoundComponent
   ],
   imports: [
