@@ -26,7 +26,7 @@ export const POSITIONS = [
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: 'my-auth-token'
+    'Access-Control-Allow-Origin': '*'
   })
 };
 
@@ -40,7 +40,7 @@ export class HttpRestService {
 
   // GET
   getObject(id: string) {
-    const suburl = 'http://localhost/';
+    const suburl = 'http://localhost:3000/order';
     const url = `${suburl}/${id}`;
     return this.http.get<Order>(url)
       .pipe(
@@ -50,7 +50,7 @@ export class HttpRestService {
   }
 
   getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>('http://localhost/...')
+    return this.http.get<Order[]>('http://localhost:3000/orders')
       .pipe(
         retry(3),
         catchError(this.handleError)
@@ -72,7 +72,7 @@ export class HttpRestService {
   // POST
   // you're expecting the server to return the new order
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>('http://localhost/', order, httpOptions)
+    return this.http.post<Order>('http://localhost:3000/order', order, httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -81,7 +81,7 @@ export class HttpRestService {
 
   // PUT
   putOrder(order: Order): Observable<Order> {
-    return this.http.put<Order>('http://localhost/', order, httpOptions)
+    return this.http.put<Order>('http://localhost:3000/order', order, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
@@ -89,7 +89,7 @@ export class HttpRestService {
 
   // DELETE
   deleteOrder(id: string): Observable<{}> {
-    const suburl = 'http://localhost/'; // Part of DELETE URL
+    const suburl = 'http://localhost/order'; // Part of DELETE URL
     const url = `${suburl}/${id}`; // DELETE api/heroes/42
     return this.http.delete(url, httpOptions)
       .pipe(
