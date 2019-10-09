@@ -10,9 +10,18 @@ import { CreateObjectComponent } from './create-object/create-object.component';
 import { UpsertObjectComponent } from './upsert-object/upsert-object.component';
 import { DetailViewOrderComponent } from './detail-view-order/detail-view-order.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatTableModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule, MatInputModule,
+  MatSelectModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +44,10 @@ import {HttpClientModule} from '@angular/common/http';
     MatIconModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
