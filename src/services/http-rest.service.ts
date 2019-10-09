@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
 export interface Order {
@@ -55,6 +55,18 @@ export class HttpRestService {
         retry(3),
         catchError(this.handleError)
       );
+   /*const t: Order = {
+     id: '0120',
+    name: 'yves',
+    forename: 'sta',
+    position: 'bestellung',
+    street: 'affe',
+    zip: '74821',
+    town: 'mosbach',
+   };
+   const temp = [];
+   temp.push(t);
+   return of(temp);*/
   }
 
   // POST
