@@ -24,11 +24,21 @@ export class HttpRestService {
   }
 
   // GET
-  getObject() {
-    return this.http.get<Order>('http://localhost/')
+  getObject(id: number) {
+    const suburl = 'http://localhost/';
+    const url = `${suburl}/${id}`;
+    return this.http.get<Order>(url)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
+      );
+  }
+
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>('http://localhost/...')
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
       );
   }
 

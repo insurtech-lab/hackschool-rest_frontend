@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-import {HttpRestService} from '../../services/http-rest.service';
+import {HttpRestService, Order} from '../../services/http-rest.service';
 
 @Component({
   selector: 'app-read-object',
@@ -9,16 +9,19 @@ import {HttpRestService} from '../../services/http-rest.service';
 })
 export class ReadObjectComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'quantity', 'category-name', 'category-unit', 'actions'];
-  dataSource = new MatTableDataSource<Ingredient>();
-  categories = [];
+  dataSource = new MatTableDataSource<Order>();
   selectedRowIndex = -1;
 
-  constructor(private ds: HttpRestService) { }
+  error = null;
+
+  constructor(private http: HttpRestService) { }
 
   // subscribe to data service for data updates
   ngOnInit() {
-    this.ds.getCart().subscribe((ingredient: Ingredient[]) => this.dataSource.data = ingredient);
-    this.ds.getCats().subscribe(cats => this.categories = cats);
+    this.http.getAllOrders().subscribe(
+      (data: Order[]) => this.dataSource.data = data,
+      error => this.error = error
+    );
   }
 
   // used for searching thru the table:
