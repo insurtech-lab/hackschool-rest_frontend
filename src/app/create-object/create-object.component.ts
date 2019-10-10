@@ -39,7 +39,7 @@ export class CreateObjectComponent implements OnInit {
       console.log(this.orderForm.value);
       // no error. form data is valid. now create recipe and add it.
       const order: Order = {
-        id: uuid(),
+        id: null,
         name: this.orderForm.value.name,
         forename: this.orderForm.value.forename,
         position: this.orderForm.value.positions,

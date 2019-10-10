@@ -47,7 +47,7 @@ export class UpsertObjectComponent implements OnInit {
         town: this.orderForm.value.town
       };
       // PUT
-      this.http.putOrder(order).subscribe(data => console.log(data));
+      this.http.addOrder(order).subscribe(data => console.log(data));
     } else {
       // reset all input fields due to a invalid recipe form status
       this.orderForm.reset();

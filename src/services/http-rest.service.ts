@@ -4,7 +4,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
 export interface Order {
-  id: string;
+  id: number;
   name: string;
   forename: string;
   position: string;
@@ -26,7 +26,7 @@ export const POSITIONS = [
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Charset': 'utf-8'
   })
 };
 
@@ -40,7 +40,7 @@ export class HttpRestService {
 
   // GET
   getObject(id: string) {
-    const suburl = 'http://localhost:3000/order';
+    const suburl = 'https://w3w75.sse.codesandbox.io/api/orders';
     const url = `${suburl}/${id}`;
     return this.http.get<Order>(url)
       .pipe(
@@ -50,7 +50,7 @@ export class HttpRestService {
   }
 
   getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>('http://localhost:3000/orders')
+    return this.http.get<Order[]>('https://w3w75.sse.codesandbox.io/api/orders')
       .pipe(
         retry(3),
         catchError(this.handleError)
@@ -72,24 +72,24 @@ export class HttpRestService {
   // POST
   // you're expecting the server to return the new order
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>('http://localhost:3000/order', order, httpOptions)
+    return this.http.post<Order>('https://w3w75.sse.codesandbox.io/api/orders', order, httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
   }
 
-  // PUT
+/*  // PUT
   putOrder(order: Order): Observable<Order> {
     return this.http.put<Order>('http://localhost:3000/order', order, httpOptions)
       .pipe(
         catchError(this.handleError)
       );
-  }
+  }*/
 
   // DELETE
   deleteOrder(id: string): Observable<{}> {
-    const suburl = 'http://localhost/order'; // Part of DELETE URL
+    const suburl = 'https://w3w75.sse.codesandbox.io/api/orders'; // Part of DELETE URL
     const url = `${suburl}/${id}`; // DELETE api/heroes/42
     return this.http.delete(url, httpOptions)
       .pipe(
@@ -107,7 +107,7 @@ export class HttpRestService {
       // The response body may contain clues as to what went wrong,
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: ${error.error.error}`);
     }
     // return an observable with a user-facing error message
     return throwError(

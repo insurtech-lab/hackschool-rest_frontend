@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import {HttpRestService, Order} from '../../services/http-rest.service';
 
@@ -10,15 +10,18 @@ import {HttpRestService, Order} from '../../services/http-rest.service';
 export class ReadObjectComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'forename', 'position', 'street', 'zip', 'town'];
   dataSource = new MatTableDataSource<Order>();
-  selectedRowIndex = -1;
   error = null;
 
-  constructor(private http: HttpRestService) { }
+  constructor(private http: HttpRestService) {
+  }
 
   // subscribe to data service for data updates
   ngOnInit() {
     this.http.getAllOrders().subscribe(
-      (data: Order[]) => this.dataSource.data = data,
+      (data: any) => {
+        this.dataSource.data = data.orders;
+        console.log(data.orders);
+      },
       error => this.error = error
     );
   }
