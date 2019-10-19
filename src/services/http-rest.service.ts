@@ -40,7 +40,7 @@ export class HttpRestService {
 
   // GET
   getObject(id: string) {
-    const suburl = 'https://w3w75.sse.codesandbox.io/api/orders';
+    const suburl = 'http://localhost:8080/api/orders';
     const url = `${suburl}/${id}`;
     return this.http.get<Order>(url)
       .pipe(
@@ -50,7 +50,7 @@ export class HttpRestService {
   }
 
   getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>('https://w3w75.sse.codesandbox.io/api/orders')
+    return this.http.get<Order[]>('http://localhost:8080/api/orders')
       .pipe(
         retry(3),
         catchError(this.handleError)
@@ -72,7 +72,7 @@ export class HttpRestService {
   // POST
   // you're expecting the server to return the new order
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>('https://w3w75.sse.codesandbox.io/api/orders', order, httpOptions)
+    return this.http.post<Order>('http://localhost:8080/api/orders', order, httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -89,7 +89,7 @@ export class HttpRestService {
 
   // DELETE
   deleteOrder(id: string): Observable<{}> {
-    const suburl = 'https://w3w75.sse.codesandbox.io/api/orders'; // Part of DELETE URL
+    const suburl = 'http://localhost:8080/api/orders'; // Part of DELETE URL
     const url = `${suburl}/${id}`; // DELETE api/heroes/42
     return this.http.delete(url, httpOptions)
       .pipe(
